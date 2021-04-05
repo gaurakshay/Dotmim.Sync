@@ -9,6 +9,7 @@ jobs:
       buildConfiguration: "Release"
       artifactName: "release"
       packageID: "Dotmim.Sync.SQLCipher"
+      repositoryLocation: "Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj"
 
     steps:
       - task: UseDotNet@2
@@ -31,13 +32,13 @@ jobs:
         inputs:
           command: 'custom'
           custom: 'pack'
-          arguments: 'Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o ${{ Build.ArtifactStagingDirectory }} -v 
+          arguments: '$(repositoryLocation) -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -v 
           detailed --include-source -p:SymbolPackageFormat=snupkg'
       - task: DotNetCoreCLI@2
         displayName: "Push to Feed"
         inputs:
           command: 'push'
           arguments: '-p:PackageID=$(packageID)'
-          packagesToPush: '${{ Build.ArtifactStagingDirectory }}/*.nupkg;${{ Build.ArtifactStagingDirectory }}/*.snupkg'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;$(Build.ArtifactStagingDirectory)/*.snupkg'
           nuGetFeedType: 'internal'
           publishVstsFeed: $(vstsFeed)
