@@ -21,12 +21,12 @@ jobs:
       - task: NuGetAuthenticate@0
         displayName: 'NuGet Authenticate'
 
-      - task: DotNetCoreCLI@2
+      - task: NugetCommand@2
         displayName: "Pack the Project"
         inputs:
-          command: 'custom'
-          custom: 'pack'
-          arguments: '$(repositoryLocation) -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+          command: pack
+          packagesToPack: '$(repositoryLocation)'
+          configuration: $(buildConfiguration)
       - task: DotNetCoreCLI@2
         displayName: "Push to Feed"
         inputs:
