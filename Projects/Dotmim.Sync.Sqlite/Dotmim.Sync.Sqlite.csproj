@@ -9,9 +9,9 @@
 
     <Authors>Sébastien Pertus</Authors>
     <Company>Microsoft</Company>
-    <Title>Dotmim.Sync.Sqlite</Title>
-    <Summary>SQLite Sync Provider. Client provider .Net Standard 2.0</Summary>
-    <Description>SQLite Sync Provider. Manage a sync process beetween two relational databases provider. This provider works with SQL Server and can be used only as Client provider. Use SqlSyncProvider or MySqlSyncProvider for the server side .Net Standard 2.0</Description>
+    <Title>Dotmim.Sync.SQLCipher</Title>
+    <Summary>SQLite Sync Provider (with SQLCipher). Client provider .Net Standard 2.0</Summary>
+    <Description>SQLite (with SQLCipher) Sync Provider. Manage a sync process beetween two relational databases provider. This provider works with SQL Server and can be used only as Client provider. Use SqlSyncProvider or MySqlSyncProvider for the server side .Net Standard 2.0</Description>
     <PackageProjectUrl>https://dotmimsync.readthedocs.io/</PackageProjectUrl>
     <PackageIconFullPath>../../docs/assets/packageIcon.png</PackageIconFullPath>
     <RepositoryUrl>https://github.com/Mimetis/Dotmim.Sync</RepositoryUrl>
@@ -46,8 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SQLite" Version="5.0.3" />
+    <PackageReference Include="Microsoft.Data.SQLite.Core" Version="5.0.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.0.4" />
     <ProjectReference Include="..\Dotmim.Sync.Core\Dotmim.Sync.Core.csproj" />
   </ItemGroup>
 
