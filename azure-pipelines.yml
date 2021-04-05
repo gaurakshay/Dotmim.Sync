@@ -848,7 +848,7 @@ jobs:
       #   continueOnError: true
       - script: |
           dotnet build Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) --version-suffix $(buildBetaId)
-          dotnet pack Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.Sqlite --version-suffix $(buildBetaId) 
+          dotnet pack Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.SqlCipher --version-suffix $(buildBetaId) 
         displayName: "beta nuget Dotmim.Sync.Sqlite (SQLCipher)"
         continueOnError: true
       # - script: |
@@ -921,7 +921,7 @@ jobs:
       #   continueOnError: true
       - script: |
           dotnet build Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) 
-          dotnet pack Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.Sqlite  
+          dotnet pack Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.SqlCipher  
         displayName: "release nuget Dotmim.Sync.Sqlite (SQLCipher)"
         continueOnError: true
       # - script: |
