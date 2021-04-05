@@ -8,6 +8,7 @@ jobs:
     variables:
       buildConfiguration: "Release"
       artifactName: "release"
+      packageID: "Dotmim.Sync.Sqlite"
       repositoryLocation: "Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj"
 
     steps:
@@ -17,20 +18,21 @@ jobs:
         inputs:
           version: 5.x
           includePreviewVersions: true
+      
+      - script: |
+          dotnet build Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) 
+          dotnet pack Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.Sqlite  
+        displayName: "release nuget Dotmim.Sync.Sqlite"
+        continueOnError: true
 
       - task: NuGetAuthenticate@0
         displayName: 'NuGet Authenticate'
 
-      - task: NugetCommand@2
-        displayName: "Pack the Project"
-        inputs:
-          command: pack
-          packagesToPack: '$(repositoryLocation)'
-          configuration: $(buildConfiguration)
       - task: DotNetCoreCLI@2
         displayName: "Push to Feed"
         inputs:
           command: 'push'
-          packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+          arguments: '-p:PackageID=$(packageID)'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/Dotmim.Sync/Sqlite/*.nupkg;$(Build.ArtifactStagingDirectory)/Dotmim.Sync/Sqlite/*.snupkg'
           nuGetFeedType: 'internal'
           publishVstsFeed: $(vstsFeed)
