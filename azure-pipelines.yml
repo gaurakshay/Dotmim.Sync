@@ -8,7 +8,6 @@ jobs:
     variables:
       buildConfiguration: "Release"
       artifactName: "release"
-      packageID: "Dotmim.Sync.Sqlite"
       repositoryLocation: "Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj"
 
     steps:
@@ -27,12 +26,11 @@ jobs:
         inputs:
           command: 'custom'
           custom: 'pack'
-          arguments: '$(repositoryLocation) -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -v detailed --include-source -p:SymbolPackageFormat=snupkg'
+          arguments: '$(repositoryLocation) -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
       - task: DotNetCoreCLI@2
         displayName: "Push to Feed"
         inputs:
           command: 'push'
-          arguments: '-p:PackageID=$(packageID)'
-          packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;$(Build.ArtifactStagingDirectory)/*.snupkg'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
           nuGetFeedType: 'internal'
           publishVstsFeed: $(vstsFeed)
