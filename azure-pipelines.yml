@@ -8,7 +8,7 @@ jobs:
     variables:
       buildConfiguration: "Release"
       artifactName: "release"
-      packageID: "Dotmim.Sync.SQLCipher"
+      packageID: "Dotmim.Sync.Sqlite"
       repositoryLocation: "Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj"
 
     steps:
