@@ -32,18 +32,20 @@ jobs:
       - task: NuGetAuthenticate@0
         displayName: 'NuGet Authenticate'
 
-      - task: DotNetCoreCLI@2
+      - task: NuGetCommand@2
         displayName: "Push to Feed"
         inputs:
           command: 'push'
           packagesToPush: '$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.nupkg;$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.snupkg'
           nuGetFeedType: 'internal'
           publishVstsFeed: $(vstsFeed)
+          allowPackageConflicts: true
 
-      - task: DotNetCoreCLI@2
+      - task: NuGetCommand@2
         displayName: "Push to Feed"
         inputs:
           command: 'push'
           packagesToPush: '$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Sqlite/*.nupkg;$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Sqlite/*.snupkg'
           nuGetFeedType: 'internal'
           publishVstsFeed: $(vstsFeed)
+          allowPackageConflicts: true
