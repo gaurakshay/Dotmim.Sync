@@ -17,11 +17,11 @@ jobs:
           version: 5.x
           includePreviewVersions: true
       
-      # - script: |
-      #     dotnet build Projects/Dotmim.Sync.Core/Dotmim.Sync.Core.csproj -c $(buildConfiguration) 
-      #     dotnet pack Projects/Dotmim.Sync.Core/Dotmim.Sync.Core.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core
-      #   displayName: "Create nuget packages for Dotmim.Sync.Core"
-      #   continueOnError: true
+      - script: |
+          dotnet build Projects/Dotmim.Sync.Core/Dotmim.Sync.Core.csproj -c $(buildConfiguration) 
+          dotnet pack Projects/Dotmim.Sync.Core/Dotmim.Sync.Core.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core
+        displayName: "Create nuget packages for Dotmim.Sync.Core"
+        continueOnError: true
 
       - script: |
           dotnet build Projects/Dotmim.Sync.Sqlite/Dotmim.Sync.Sqlite.csproj -c $(buildConfiguration) 
@@ -32,14 +32,14 @@ jobs:
       - task: NuGetAuthenticate@0
         displayName: 'NuGet Authenticate'
 
-      # - task: NuGetCommand@2
-      #   displayName: "Push to Feed"
-      #   inputs:
-      #     command: 'push'
-      #     packagesToPush: '$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.nupkg;$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.snupkg'
-      #     nuGetFeedType: 'internal'
-      #     publishVstsFeed: $(vstsFeed)
-      #     allowPackageConflicts: true
+      - task: NuGetCommand@2
+        displayName: "Push to Feed"
+        inputs:
+          command: 'push'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.nupkg;$(Build.ArtifactStagingDirectory)/Dotmim.Sync.Core/*.snupkg'
+          nuGetFeedType: 'internal'
+          publishVstsFeed: $(vstsFeed)
+          allowPackageConflicts: true
 
       - task: NuGetCommand@2
         displayName: "Push to Feed"
